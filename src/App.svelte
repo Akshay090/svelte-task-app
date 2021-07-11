@@ -1,13 +1,15 @@
 <script lang="ts">
   import NewTask from "./components/NewTask.svelte";
-import Task from "./components/Task.svelte";
+  import Task from "./components/Task.svelte";
+  import TaskActions from "./components/TaskActions.svelte";
 </script>
 
 <main>
   <h1>Svelte TODO APP !!</h1>
   <div class="todo">
+    <TaskActions />
     <Task />
-	<NewTask/>
+    <NewTask />
   </div>
 </main>
 
