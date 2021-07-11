@@ -1,22 +1,43 @@
 <script>
   import Close24 from "carbon-icons-svelte/lib/Close24";
   import Checkmark24 from "carbon-icons-svelte/lib/Checkmark24";
+  import { createEventDispatcher } from "svelte";
 
+  const dispatch = createEventDispatcher();
 
-  let name = "My Task 1";
+  export let newTaskInput;
+  let name = "";
+
+  function closeClick() {
+    newTaskInput = false;
+  }
+
+  function addTask() {
+    const newTask = {
+      name,
+      isActive: false,
+      time: 0,
+    };
+    dispatch("newTask", newTask);
+  }
 </script>
 
 <div class="task">
   <div class="task-body">
-    <input class="task-input" type="text" placeholder="Write your New Task" />
+    <input
+      bind:value={name}
+      class="task-input"
+      type="text"
+      placeholder="Write your New Task"
+    />
   </div>
 
   <div class="task-actions">
     <div class="icon-bg">
-      <Close24 class="icon" />
+      <Close24 class="icon" on:click={closeClick} />
     </div>
     <div class="icon-bg">
-      <Checkmark24 class="icon" />
+      <Checkmark24 class="icon" on:click={addTask} />
     </div>
   </div>
 </div>

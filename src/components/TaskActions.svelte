@@ -1,12 +1,20 @@
 <script>
   import AddAlt24 from "carbon-icons-svelte/lib/AddAlt24";
+  import { createEventDispatcher } from "svelte";
+
+  const dispatch = createEventDispatcher();
+  function addTaskEvent() {
+    dispatch("addTask", null);
+  }
 </script>
 
 <div class="task-actions">
   <div class="day">Today</div>
 
   <div class="actions">
-    <div class="add"><AddAlt24 /> <span>Add Taks</span></div>
+    <div class="add" on:click={addTaskEvent}>
+      <AddAlt24 /> <span>Add Taks</span>
+    </div>
   </div>
 </div>
 
