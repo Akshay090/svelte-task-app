@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+
   import NewTask from "./components/NewTask.svelte";
   import Task from "./components/Task.svelte";
   import TaskActions from "./components/TaskActions.svelte";
@@ -12,6 +14,29 @@
     allTasks = [...allTasks, newTask];
     newTaskInput = false;
   }
+
+  $: {
+    //   saving tasks to localstorage
+    if (allTasks?.length > 0) {
+      localStorage.setItem("allTasks", JSON.stringify(allTasks));
+    }
+  }
+
+  function getSavedTask(): any[] {
+    try {
+      let storedTask: any[] = JSON.parse(localStorage.getItem("allTasks"));
+      return storedTask;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  }
+  onMount(() => {
+    const savedTasks = getSavedTask();
+    if (savedTasks) {
+      allTasks = savedTasks;
+    }
+  });
 </script>
 
 <main>

@@ -20,12 +20,17 @@
     };
     dispatch("newTask", newTask);
   }
+
+  function onKeyPress(e) {
+    if (e.charCode === 13) addTask();
+  }
 </script>
 
 <div class="task">
   <div class="task-body">
     <input
       bind:value={name}
+      on:keypress={onKeyPress}
       class="task-input"
       type="text"
       placeholder="Write your New Task"
